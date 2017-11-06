@@ -11,8 +11,6 @@ public class Reg extends AppCompatActivity {
 
     Button submit;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

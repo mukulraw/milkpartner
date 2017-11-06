@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context="com.youthlive.milkpartner.Home">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,6 +41,7 @@
             android:id="@+id/image"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:src="@drawable/user"
 
           />
 
@@ -47,6 +52,7 @@
                 android:id="@+id/name"
                 android:text="Mukul Rawat"
                 android:textColor="#fff"
+                android:layout_marginStart="5dp"
                 android:layout_gravity="center"
                 android:gravity="center"/>
 
@@ -85,6 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="18dp"
+                android:id="@+id/state"
                 android:layout_marginTop="2dp"
 
                 />
@@ -113,7 +120,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/location"
+        android:id="@+id/map"
         android:padding="18sp"
         android:text="Select Location"
         android:layout_marginStart="10dp"
@@ -158,7 +165,7 @@
             android:layout_weight="2">
 
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cdcdcd_stroke"
@@ -184,7 +191,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/cam"
-            android:padding="30dp"
+            android:id="@+id/cammra"
+            android:scaleType="centerCrop"
             android:layout_marginStart="20dp"
             android:background="#e6e3e3"/>
 
@@ -204,7 +212,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Upload"
+            android:text="Click"
+            android:id="@+id/upload"
             android:padding="10dp"
             android:layout_marginEnd="18dp"
             android:layout_marginStart="18dp"
@@ -248,11 +257,74 @@
             android:textColor="#1E88E5"
             android:padding="5dp"/>
 
-<Switch
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    />
+       <!-- <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.nightonke.jellytogglebutton.JellyToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:jtbLeftText="NO"
+                app:jtbRightText="Yes"
+                app:jtbLeftTextSize="12sp"
+                app:jtbRightTextSize="12sp"
+                app:jtbTextMarginLeft="2dp"
+                app:jtbTextMarginRight="2dp"
+                app:jtbTextMarginBottom="2dp"
+                app:jtbTextMarginTop="2dp"
+                app:jtbTextMarginCenter="10dp"
+                android:layout_alignParentEnd="true"
+                app:jtbLeftThumbColor="#F44336"
+                app:jtbRightThumbColor="#558B2F"
+                app:jtbLeftBackgroundColor="#fff"
+                app:jtbRightBackgroundColor="#fff"/>
+
+
+        </RelativeLayout>-->
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/yes"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yes"
+                android:text="Yes"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/no"
+                android:text="No"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:background="@drawable/no"
+                android:textColor="#fff"
+                />
+
+
+
+
+
+        </LinearLayout>
+
+
 
     </RelativeLayout>
 
@@ -261,35 +333,44 @@
         android:layout_height="1dp"
         android:background="#cdcdcd"/>
 
-    <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linear"
+            android:visibility="gone">
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/diph"
-        android:text="Diphenylamine"
+        android:orientation="vertical"
         android:paddingStart="18dp"
         android:padding="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginStart="18dp"
         android:drawablePadding="10dp"
-        android:drawableEnd="@drawable/plus"/>
+        />
 
 
 
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="15dp"
             android:padding="10dp"
-            android:hint="start typing pesticides name"
-            android:background="@drawable/white_stroke"
+            android:id="@+id/start"
+            android:hint="pesticides name"
+            android:drawableEnd="@drawable/plus"
+            android:background="@drawable/stroke"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-
          />
 
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -307,14 +388,88 @@
                 android:padding="5dp"/>
 
 
-
-            <Switch
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_alignParentEnd="true"
-                />
+                android:background="@drawable/yes"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yes1"
+                    android:text="Yes"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/no1"
+                    android:text="No"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:background="@drawable/no"
+                    android:textColor="#fff"
+                    />
+
+
+
+
+
+            </LinearLayout>
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linear1"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/diph1"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:padding="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="18dp"
+                android:drawablePadding="10dp"
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="15dp"
+                android:padding="10dp"
+                android:id="@+id/start1"
+                android:hint="pesticides name"
+                android:drawableEnd="@drawable/plus"
+                android:background="@drawable/stroke"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -332,4 +487,13 @@
 
     </LinearLayout>
 </ScrollView>
+
+<ProgressBar
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/progress"
+    android:visibility="gone"
+    android:layout_centerInParent="true"/>
+</RelativeLayout>
+
 
