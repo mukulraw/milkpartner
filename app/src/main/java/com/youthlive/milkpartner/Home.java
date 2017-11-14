@@ -72,12 +72,11 @@ import static java.security.AccessController.getContext;
 
 public class Home extends AppCompatActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    TextView submit, upload, map, yes, no, yes1, no1 , start;
+    TextView submit, upload, map, yes, no, yes1, no1 , start , su , yes2 , no2;
     Dialog dialog;
     Location mLastLocation;
 
     LinearLayout diph;
-
 
 
     ImageView image;
@@ -86,19 +85,23 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
     List<Bean> list;
 
+    List<String> list1;
+
     ProgressBar bar;
 
     LinearLayout linear;
+
     LinearLayout linear1;
 
-    Spinner state, dist;
+    LinearLayout linear2;
+
+    Spinner state, dist , sample;
 
     List<String> statelist;
 
     List<String> stateId;
 
     List<String> citylist;
-
 
     protected LocationManager mLocationManager;
     protected LocationListener locationListener;
@@ -131,7 +134,9 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
         // locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         // locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
-        submit = (TextView) findViewById(R.id.sub);
+        submit = (TextView) findViewById(R.id.su);
+
+        su = (TextView) findViewById(R.id.sub);
 
         start = (TextView) findViewById(R.id.start);
 
@@ -147,9 +152,13 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
         yes1 = (TextView) findViewById(R.id.yes1);
 
+        yes2 = (TextView) findViewById(R.id.yes3);
+
         no = (TextView) findViewById(R.id.no);
 
         no1 = (TextView) findViewById(R.id.no1);
+
+        no2 = (TextView) findViewById(R.id.no3);
 
         image = (ImageView) findViewById(R.id.cammra);
 
@@ -157,9 +166,13 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
         dist = (Spinner) findViewById(R.id.dist);
 
+        sample = (Spinner) findViewById(R.id.sample);
+
         linear = (LinearLayout) findViewById(R.id.linear);
+
         linear1 = (LinearLayout) findViewById(R.id.linear1);
 
+       // linear2 = (LinearLayout) findViewById(R.id.linear2);
 
         statelist = new ArrayList<>();
 
@@ -253,6 +266,26 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
         b17.setTitle("Aflatoxin M1");
         list.add(b17);
 
+
+
+        list1 = new ArrayList<>();
+        list1.add("Cow Milk");
+        list1.add("Buffalo Milk");
+        list1.add("Goat Milk");
+        list1.add("Camel Milk");
+        list1.add("Mixed Milk");
+
+
+        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(Home.this, android.R.layout.simple_spinner_item, list1);
+
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        sample.setAdapter(dataAdapter1);
+
+
+
+
+
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,7 +309,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 yes.setBackground(null);
                 no.setTextColor(Color.WHITE);
                 yes.setTextColor(Color.BLACK);
-
                 linear.setVisibility(View.GONE);
 
 
@@ -310,6 +342,40 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
             }
         });
+
+        yes2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                yes2.setBackgroundResource(R.drawable.green);
+                no2.setBackground(null);
+                yes2.setTextColor(Color.WHITE);
+                no2.setTextColor(Color.BLACK);
+                linear2.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        no2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                no2.setBackgroundResource(R.drawable.no);
+                yes2.setBackground(null);
+                no2.setTextColor(Color.WHITE);
+                yes2.setTextColor(Color.BLACK);
+                linear2.setVisibility(View.GONE);
+
+            }
+        });
+
+
+
+
+
+
+
 
 
         map.setOnClickListener(new View.OnClickListener() {
@@ -348,6 +414,8 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             @Override
             public void onResponse(Call<StateBean> call, Response<StateBean> response) {
 
+
+                statelist.clear();
 
                 statelist.add("--- Select State ---");
 
@@ -488,6 +556,27 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 startActivity(i);
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+        su.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(Home.this , Reg.class);
+                startActivity(i);
+
+            }
+        });
+
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override

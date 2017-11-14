@@ -93,7 +93,6 @@
                 android:padding="18dp"
                 android:id="@+id/state"
                 android:layout_marginTop="2dp"
-
                 />
 
         </RelativeLayout>
@@ -104,7 +103,8 @@
     android:layout_height="wrap_content"
     android:background="#d6d3d3"
     android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp">
+    android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp">
 
     <Spinner
         android:layout_width="match_parent"
@@ -116,6 +116,12 @@
         />
 
 </RelativeLayout>
+
+
+
+
+
+
 
     <TextView
         android:layout_width="match_parent"
@@ -153,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/loc"
                 android:padding="5dp"
-                android:text="Enter Location"
+                android:text="Area Name"
                 />
         </LinearLayout>
 
@@ -225,6 +231,52 @@
 
     </LinearLayout>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sample Details"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d6d3d3"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:id="@+id/sample"
+                android:layout_marginTop="2dp"
+
+                />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="#000"
+            android:id="@+id/su"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="#fff"
+            android:textSize="15dp"/>
+
+
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -251,11 +303,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/pes"
-            android:text="pesticides"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:padding="5dp"
             android:paddingStart="18dp"
-            android:textColor="#1E88E5"
-            android:padding="5dp"/>
+            android:text="Adultration"
+            android:textColor="#1E88E5" />
 
        <!-- <RelativeLayout
             android:layout_width="match_parent"
@@ -283,7 +336,7 @@
         </RelativeLayout>-->
 
 
-        <LinearLayout
+               <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -382,7 +435,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Antibiotics"
+                android:text="Pesticides"
                 android:paddingStart="18dp"
                 android:textColor="#1E88E5"
                 android:padding="5dp"/>
@@ -469,6 +522,182 @@
                 />
 
         </LinearLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/antibiotics"
+                android:text="Antibiotics"
+                android:paddingStart="18dp"
+                android:textColor="#1E88E5"
+                android:padding="5dp"/>
+
+            <!-- <RelativeLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+
+                 <com.nightonke.jellytogglebutton.JellyToggleButton
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     app:jtbLeftText="NO"
+                     app:jtbRightText="Yes"
+                     app:jtbLeftTextSize="12sp"
+                     app:jtbRightTextSize="12sp"
+                     app:jtbTextMarginLeft="2dp"
+                     app:jtbTextMarginRight="2dp"
+                     app:jtbTextMarginBottom="2dp"
+                     app:jtbTextMarginTop="2dp"
+                     app:jtbTextMarginCenter="10dp"
+                     android:layout_alignParentEnd="true"
+                     app:jtbLeftThumbColor="#F44336"
+                     app:jtbRightThumbColor="#558B2F"
+                     app:jtbLeftBackgroundColor="#fff"
+                     app:jtbRightBackgroundColor="#fff"/>
+
+
+             </RelativeLayout>-->
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/yes"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yes2"
+                    android:text="Yes2"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/no2"
+                    android:text="No2"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:background="@drawable/no"
+                    android:textColor="#fff"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pes2"
+                android:text="pesticides"
+                android:paddingStart="18dp"
+                android:textColor="#1E88E5"
+                android:padding="5dp"/>
+
+            <!-- <RelativeLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+
+                 <com.nightonke.jellytogglebutton.JellyToggleButton
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     app:jtbLeftText="NO"
+                     app:jtbRightText="Yes"
+                     app:jtbLeftTextSize="12sp"
+                     app:jtbRightTextSize="12sp"
+                     app:jtbTextMarginLeft="2dp"
+                     app:jtbTextMarginRight="2dp"
+                     app:jtbTextMarginBottom="2dp"
+                     app:jtbTextMarginTop="2dp"
+                     app:jtbTextMarginCenter="10dp"
+                     android:layout_alignParentEnd="true"
+                     app:jtbLeftThumbColor="#F44336"
+                     app:jtbRightThumbColor="#558B2F"
+                     app:jtbLeftBackgroundColor="#fff"
+                     app:jtbRightBackgroundColor="#fff"/>
+
+
+             </RelativeLayout>-->
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/yes"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yes3"
+                    android:text="Yes"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/no3"
+                    android:text="No"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:background="@drawable/no"
+                    android:textColor="#fff"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
 
 
         <TextView
