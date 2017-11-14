@@ -2,15 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.youthlive.milkpartner">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-
-
-
 
     <application
         android:allowBackup="true"
@@ -19,10 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCHcdhkjp9Uf-7rcUAaG6VoNvXHCKbSnYE"/>
+            android:value="AIzaSyCHcdhkjp9Uf-7rcUAaG6VoNvXHCKbSnYE" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -32,7 +27,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Home" />
-        <activity android:name=".Reg"></activity>
+        <activity android:name=".Reg" />
+        <activity android:name=".homm22" />
+        <activity android:name=".Submit" />
+        <activity android:name=".MyBookings"></activity>
     </application>
 
 </manifest>

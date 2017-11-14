@@ -72,11 +72,15 @@ import static java.security.AccessController.getContext;
 
 public class Home extends AppCompatActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    TextView submit, upload, map, yes, no, yes1, no1 , start , su , yes2 , no2;
-    Dialog dialog;
+    TextView submit, upload, map, yes, no, yes1, no1 , start , yes2 , no2 , start1 , yes3 , no3;
+    Dialog dialog , dialog1;
     Location mLastLocation;
 
-    LinearLayout diph;
+
+    Spinner spinner;
+    TextView su;
+
+    LinearLayout diph , diph1;
 
 
     ImageView image;
@@ -134,17 +138,24 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
         // locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         // locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
-        submit = (TextView) findViewById(R.id.su);
+        submit = (TextView) findViewById(R.id.sub);
 
         su = (TextView) findViewById(R.id.sub);
 
         start = (TextView) findViewById(R.id.start);
+        start1 = (TextView) findViewById(R.id.start1);
 
         upload = (TextView) findViewById(R.id.upload);
 
         map = (TextView) findViewById(R.id.map);
 
+        su = (TextView) findViewById(R.id.su);
+
         diph = (LinearLayout) findViewById(R.id.diph);
+
+        diph1 = (LinearLayout) findViewById(R.id.diph1);
+
+        spinner = (Spinner) findViewById(R.id.spinner);
 
         bar = (ProgressBar) findViewById(R.id.progress);
 
@@ -152,13 +163,15 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
         yes1 = (TextView) findViewById(R.id.yes1);
 
-        yes2 = (TextView) findViewById(R.id.yes3);
+        yes2 = (TextView) findViewById(R.id.yes2);
+        yes3 = (TextView) findViewById(R.id.yes3);
 
         no = (TextView) findViewById(R.id.no);
 
         no1 = (TextView) findViewById(R.id.no1);
 
-        no2 = (TextView) findViewById(R.id.no3);
+        no2 = (TextView) findViewById(R.id.no2);
+        no3 = (TextView) findViewById(R.id.no3);
 
         image = (ImageView) findViewById(R.id.cammra);
 
@@ -172,7 +185,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
         linear1 = (LinearLayout) findViewById(R.id.linear1);
 
-       // linear2 = (LinearLayout) findViewById(R.id.linear2);
+        // linear2 = (LinearLayout) findViewById(R.id.linear2);
 
         statelist = new ArrayList<>();
 
@@ -284,8 +297,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
 
 
-
-
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -351,7 +362,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 no2.setBackground(null);
                 yes2.setTextColor(Color.WHITE);
                 no2.setTextColor(Color.BLACK);
-                linear2.setVisibility(View.VISIBLE);
+                //linear2.setVisibility(View.VISIBLE);
 
             }
         });
@@ -365,13 +376,38 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 yes2.setBackground(null);
                 no2.setTextColor(Color.WHITE);
                 yes2.setTextColor(Color.BLACK);
-                linear2.setVisibility(View.GONE);
+                //linear2.setVisibility(View.GONE);
 
             }
         });
 
 
+        yes3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                yes3.setBackgroundResource(R.drawable.green);
+                no3.setBackground(null);
+                yes3.setTextColor(Color.WHITE);
+                no3.setTextColor(Color.BLACK);
+                //linear2.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        no3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                no3.setBackgroundResource(R.drawable.no);
+                yes3.setBackground(null);
+                no3.setTextColor(Color.WHITE);
+                yes3.setTextColor(Color.BLACK);
+                //linear2.setVisibility(View.GONE);
+
+            }
+        });
 
 
 
@@ -549,20 +585,50 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             }
         });
 
-        submit.setOnClickListener(new View.OnClickListener() {
+
+        start1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Home.this, Reg.class);
-                startActivity(i);
+
+
+                dialog1 = new Dialog(Home.this);
+                dialog1.setContentView(R.layout.dialog);
+                dialog1.setCancelable(true);
+                dialog1.show();
+
+
+                Button ok = (Button) dialog1.findViewById(R.id.ok);
+                RecyclerView grid = (RecyclerView) dialog1.findViewById(R.id.grid);
+                GridLayoutManager manager = new GridLayoutManager(context, 1);
+
+
+                final HomeAdapter1 adapter = new HomeAdapter1(Home.this, list);
+
+                grid.setLayoutManager(manager);
+                grid.setAdapter(adapter);
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        dialog1.dismiss();
+                    }
+                });
+
+
             }
         });
 
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent i = new Intent(Home.this, Reg.class);
+                startActivity(i);
 
-
-
-
+            }
+        });
 
 
 
@@ -571,7 +637,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(Home.this , Reg.class);
+                Intent i = new Intent(Home.this ,Submit .class);
                 startActivity(i);
 
             }
@@ -843,5 +909,89 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             }
         }
     }
+
+
+    public class HomeAdapter1 extends RecyclerView.Adapter<HomeAdapter1.MyViewHolder> {
+
+        Context context;
+
+        List<Bean> list = new ArrayList<>();
+
+        public HomeAdapter1(Context context , List<Bean> list){
+
+
+            this.context = context;
+
+            this.list = list;
+        }
+
+        @Override
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+
+            View v = LayoutInflater.from(context).inflate(R.layout.grid_list_model , parent , false);
+            return new MyViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(final MyViewHolder holder, int position) {
+
+
+            final Bean item = list.get(position);
+
+            holder.textView.setText(item.getTitle());
+
+
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    TextView tv = new TextView(context);
+
+                    tv.setPadding(20 , 20 , 20 , 20);
+
+                    tv.setText(item.getTitle());
+
+                    diph1.addView(tv);
+
+                    dialog1.dismiss();
+
+                }
+            });
+
+        }
+
+
+        public void setgrid(List<Bean>list){
+
+            this.list = list;
+            notifyDataSetChanged();
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+
+
+            TextView textView;
+
+
+            public MyViewHolder(View itemView) {
+                super(itemView);
+
+                textView = (TextView)itemView.findViewById(R.id.grid);
+
+
+
+
+            }
+        }
+    }
+
 
 }
