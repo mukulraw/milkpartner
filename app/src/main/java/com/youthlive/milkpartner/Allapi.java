@@ -1,6 +1,7 @@
 package com.youthlive.milkpartner;
 
 import com.youthlive.milkpartner.CityListPOJO.CityBean;
+import com.youthlive.milkpartner.loginPOJO.loginBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -23,4 +24,13 @@ public interface Allapi {
     @POST("eduschool/eduschool_app/all_city.php")
     Call<CityBean> city
             (@Part("state_id") String st);
+
+    @Multipart
+    @POST("milk-partner/api/user_login.php")
+    Call<loginBean> login(
+            @Part("email") String email,
+            @Part("password") String pass
+    );
+
+
 }

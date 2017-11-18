@@ -6,7 +6,6 @@ package com.youthlive.milkpartner;
 
 public class Bean {
 
-
     public String title = "";
 
     public String getTitle() {

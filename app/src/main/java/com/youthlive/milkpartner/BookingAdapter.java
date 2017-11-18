@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by tvs on 11/14/2017.
@@ -25,7 +26,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.booking_list_model ,parent , false);
-        return null;
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -43,10 +44,12 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
     public class MyViewHolder  extends RecyclerView.ViewHolder{
 
 
-        Button edit;
+      /*  TextView edit;*/
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
+           /* edit = (TextView)itemView.findViewById(R.id.edit);
 
             edit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -56,7 +59,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
                     context.startActivity(i);
 
                 }
-            });
+            });*/
         }
     }
 }
