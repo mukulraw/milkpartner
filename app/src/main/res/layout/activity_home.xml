@@ -56,6 +56,7 @@
                 android:id="@+id/logout"
                 android:text="LOGOUT"
                 android:textColor="#fff"
+                android:visibility="gone"
                 android:layout_gravity="end|center_vertical"
                 android:gravity="end"/>
 
@@ -85,8 +86,36 @@
                 android:textColor="#1E88E5"/>
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="Select State"
+                android:id="@+id/state"
+                android:gravity="center_vertical"
+                android:background="#d6d3d3"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                />
 
-            <RelativeLayout
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/district"
+                android:hint="Select District"
+                android:gravity="center_vertical"
+                android:background="#d6d3d3"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                />
+
+
+           <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#d6d3d3"
@@ -103,9 +132,9 @@
                     />
 
             </RelativeLayout>
+-->
 
-
-            <RelativeLayout
+           <!-- <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#d6d3d3"
@@ -123,8 +152,20 @@
                     />
 
             </RelativeLayout>
-
-
+-->
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#d6d3d3"
+    android:gravity="center_vertical"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="5dp"
+    android:hint="Area Name"
+    android:padding="10dp"
+    android:id="@+id/area"
+    android:textSize="14sp"
+    />
 
 
 
@@ -134,11 +175,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/map"
-                android:padding="18sp"
+                android:padding="10sp"
+                android:gravity="center_vertical"
                 android:text="Select Location"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="5dp"
                 android:drawableEnd="@drawable/map"
                 android:background="#d6d3d3"/>
 
@@ -166,7 +207,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/loc"
                         android:padding="5dp"
-                        android:text="Area Name"
+                        android:text="Enter Location"
                         />
                 </LinearLayout>
 
@@ -216,6 +257,7 @@
                     android:id="@+id/pic"
                     android:layout_marginStart="10dp"
                     android:layout_gravity="center_vertical"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="pic_o.1 Jpg"/>

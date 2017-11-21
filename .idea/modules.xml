@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MilkPartner.iml" filepath="$PROJECT_DIR$/MilkPartner.iml" />
+      <module fileurl="file://E:\AndroidStudioProjects\milkpartner\MilkPartner.iml" filepath="E:\AndroidStudioProjects\milkpartner\MilkPartner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/milkpartner.iml" filepath="$PROJECT_DIR$/.idea/milkpartner.iml" />
     </modules>
   </component>
 </project>

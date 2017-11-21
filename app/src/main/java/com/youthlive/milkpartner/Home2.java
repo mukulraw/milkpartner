@@ -60,7 +60,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youthlive.milkpartner.Book1POJO.BookBean;
-import com.youthlive.milkpartner.Book2POJO.Book2Bean;
 import com.youthlive.milkpartner.CityListPOJO.CityBean;
 import com.youthlive.milkpartner.CityListPOJO.CityList;
 import com.youthlive.milkpartner.StatePOJO.StateList;
@@ -85,7 +84,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static java.security.AccessController.getContext;
 
-public class Home extends AppCompatActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class Home2 extends AppCompatActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     TextView submit, upload, map, yes, no, yes1, no1 , start , yes2 , no2 , start1 , yes3 , no3 , name;
     Dialog dialog , dialog1 , dialog2 , dialog3;
@@ -99,8 +98,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
     TextView su;
 
     LinearLayout diph , diph1;
-
-
 
 
     ImageView image;
@@ -124,7 +121,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
 
 
-   // String s, d , a , b , ima;
+    // String s, d , a , b , ima;
 
 
     List<String> statelist;
@@ -162,16 +159,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
     private static final int CAMERA_REQUEST = 5;
 
     String mCurrentPhotoPath = "";
-
-
-    String adultration = "";
-    String pesticides = "";
-    String antibiotics = "no";
-    String aflatoxin = "no";
-
-    String bookId = "";
-
-
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -234,7 +221,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             public void onClick(View view) {
 
 
-                dialog2 = new Dialog(Home.this);
+                dialog2 = new Dialog(Home2.this);
                 dialog2.setContentView(R.layout.dialog);
                 dialog2.setCancelable(true);
                 dialog2.show();
@@ -268,7 +255,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                         statelist.clear();
 
 
-                        StateAdapter adapter = new StateAdapter(Home.this , response.body().getStateList());
+                        StateAdapter adapter = new StateAdapter(Home2.this , response.body().getStateList());
                         grid.setAdapter(adapter);
                         grid.setLayoutManager(manager);
 
@@ -436,7 +423,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
         list1.add("Mixed Milk");
 
 
-        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(Home.this, android.R.layout.simple_spinner_item, list1);
+        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(Home2.this, android.R.layout.simple_spinner_item, list1);
 
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -530,9 +517,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 no2.setBackground(null);
                 yes2.setTextColor(Color.WHITE);
                 no2.setTextColor(Color.BLACK);
-
-                antibiotics = "yes";
-
                 //linear2.setVisibility(View.VISIBLE);
 
             }
@@ -549,8 +533,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 yes2.setTextColor(Color.BLACK);
                 //linear2.setVisibility(View.GONE);
 
-                antibiotics = "no";
-
             }
         });
 
@@ -564,8 +546,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 yes3.setTextColor(Color.WHITE);
                 no3.setTextColor(Color.BLACK);
                 //linear2.setVisibility(View.VISIBLE);
-
-                aflatoxin = "yes";
 
             }
         });
@@ -581,7 +561,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 yes3.setTextColor(Color.BLACK);
                 //linear2.setVisibility(View.GONE);
 
-                aflatoxin = "no";
             }
         });
 
@@ -612,7 +591,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                     PlacePicker.IntentBuilder intentBuilder =
                             new PlacePicker.IntentBuilder();
                     intentBuilder.setLatLngBounds(BOUNDS_MOUNTAIN_VIEW);
-                    Intent intent = intentBuilder.build(Home.this);
+                    Intent intent = intentBuilder.build(Home2.this);
                     startActivityForResult(intent, PLACE_PICKER_REQUEST);
 
                 } catch (GooglePlayServicesRepairableException
@@ -631,7 +610,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
 
 
-                dialog3 = new Dialog(Home.this);
+                dialog3 = new Dialog(Home2.this);
                 dialog3.setContentView(R.layout.dialog);
                 dialog3.setCancelable(true);
                 dialog3.show();
@@ -662,7 +641,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                     @Override
                     public void onResponse(Call<CityBean> call, Response<CityBean> response) {
 
-                        DistrictAdapter adapter = new DistrictAdapter(Home.this , response.body().getCityList());
+                        DistrictAdapter adapter = new DistrictAdapter(Home2.this , response.body().getCityList());
 
                         grid.setLayoutManager(manager);
                         grid.setAdapter(adapter);
@@ -691,7 +670,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             public void onClick(View view) {
 
 
-                dialog = new Dialog(Home.this);
+                dialog = new Dialog(Home2.this);
                 dialog.setContentView(R.layout.dialog);
                 dialog.setCancelable(true);
                 dialog.show();
@@ -702,7 +681,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 GridLayoutManager manager = new GridLayoutManager(context, 1);
 
 
-                final HomeAdapter adapter = new HomeAdapter(Home.this, list);
+                final HomeAdapter adapter = new HomeAdapter(Home2.this, list);
 
                 grid.setLayoutManager(manager);
                 grid.setAdapter(adapter);
@@ -725,7 +704,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             public void onClick(View view) {
 
 
-                dialog1 = new Dialog(Home.this);
+                dialog1 = new Dialog(Home2.this);
                 dialog1.setContentView(R.layout.dialog);
                 dialog1.setCancelable(true);
                 dialog1.show();
@@ -736,7 +715,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 GridLayoutManager manager = new GridLayoutManager(context, 1);
 
 
-                final HomeAdapter1 adapter = new HomeAdapter1(Home.this, list);
+                final HomeAdapter1 adapter = new HomeAdapter1(Home2.this, list);
 
                 grid.setLayoutManager(manager);
                 grid.setAdapter(adapter);
@@ -758,48 +737,9 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             @Override
             public void onClick(View view) {
 
-
-                if (bookId.length() >0)
-                {
-                    bar.setVisibility(View.VISIBLE);
-
-                    app b = (app)getApplicationContext();
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://nationproducts.in")
-                            .addConverterFactory(ScalarsConverterFactory.create())
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    Allapi cr = retrofit.create(Allapi.class);
-
-                    Call<Book2Bean> call = cr.book2(b.userId ,bookId , adultration ,pesticides , antibiotics , aflatoxin);
-
-                    call.enqueue(new Callback<Book2Bean>() {
-                        @Override
-                        public void onResponse(Call<Book2Bean> call, Response<Book2Bean> response) {
-
-                            bookId = "";
-
-                            Intent i = new Intent(Home.this, Reg.class);
-                            startActivity(i);
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<Book2Bean> call, Throwable t) {
-
-                        }
-                    });
-                }
-
-
-
-
-
-
-               /* Intent i = new Intent(Home.this, Reg.class);
+                Intent i = new Intent(Home2.this, Reg.class);
                 startActivity(i);
-*/
+
             }
         });
 
@@ -829,76 +769,76 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                             if (latitude.length()>0){
 
 
-                            if (mCurrentPhotoPath.length()>0)
+                                if (mCurrentPhotoPath.length()>0)
 
-                            {
-
-
-                                MultipartBody.Part body = null;
+                                {
 
 
-                                File file = new File(mCurrentPhotoPath);
+                                    MultipartBody.Part body = null;
 
 
-                                final RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
-                                body = MultipartBody.Part.createFormData("image", file.getName(), reqFile);
-
-                                bar.setVisibility(View.VISIBLE);
-                                app b = (app)getApplicationContext();
-
-                                Retrofit retrofit = new Retrofit.Builder()
-                                        .baseUrl("http://nationproducts.in")
-                                        .addConverterFactory(ScalarsConverterFactory.create())
-                                        .addConverterFactory(GsonConverterFactory.create())
-                                        .build();
-
-                                Allapi cr = retrofit.create(Allapi.class);
-
-                                Call<BookBean> call = cr.book(b.userId ,state.getText().toString() , district.getText().toString() , latitude , longitude , area.getText().toString() , body , samp);
-
-                                call.enqueue(new Callback<BookBean>() {
-                                    @Override
-                                    public void onResponse(Call<BookBean> call, Response<BookBean> response) {
-
-                                        map.setText("Select Location");
-
-                                        Toast.makeText(Home.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                                        Intent i = new Intent(Home .this , Submit.class);
-                                        startActivity(i);
-
-                                        bar.setVisibility(View.GONE);
+                                    File file = new File(mCurrentPhotoPath);
 
 
-                                    }
+                                    final RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
-                                    @Override
-                                    public void onFailure(Call<BookBean> call, Throwable t) {
+                                    body = MultipartBody.Part.createFormData("image", file.getName(), reqFile);
+
+                                    bar.setVisibility(View.VISIBLE);
+                                    app b = (app)getApplicationContext();
+
+                                    Retrofit retrofit = new Retrofit.Builder()
+                                            .baseUrl("http://nationproducts.in")
+                                            .addConverterFactory(ScalarsConverterFactory.create())
+                                            .addConverterFactory(GsonConverterFactory.create())
+                                            .build();
+
+                                    Allapi cr = retrofit.create(Allapi.class);
+
+                                    Call<BookBean> call = cr.book(b.userId ,state.getText().toString() , district.getText().toString() , latitude , longitude , area.getText().toString() , body , samp);
+
+                                    call.enqueue(new Callback<BookBean>() {
+                                        @Override
+                                        public void onResponse(Call<BookBean> call, Response<BookBean> response) {
+
+                                            map.setText("Select Location");
+
+                                            Toast.makeText(Home2.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                            Intent i = new Intent(Home2 .this , Submit.class);
+                                            startActivity(i);
+
+                                            bar.setVisibility(View.GONE);
 
 
-                                        bar.setVisibility(View.GONE);
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<BookBean> call, Throwable t) {
 
 
-
-                                    }
-                                });
+                                            bar.setVisibility(View.GONE);
 
 
 
+                                        }
+                                    });
 
+
+
+
+
+                                }
+                                else {
+
+
+                                    Toast.makeText(Home2.this, "please Select an image", Toast.LENGTH_SHORT).show();
+                                }
 
                             }
                             else {
 
-
-                                Toast.makeText(Home.this, "please Select an image", Toast.LENGTH_SHORT).show();
-                            }
-
-                            }
-                            else {
-
-                                Toast.makeText(Home.this, "please Select a Location", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Home2.this, "please Select a Location", Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -909,7 +849,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                         }
 
                         else {
-                            Toast.makeText(Home.this, "please Select a Sample", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Home2.this, "please Select a Sample", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -917,7 +857,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                     }
                     else {
 
-                        Toast.makeText(Home.this, "please select a district", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Home2.this, "please select a district", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -926,7 +866,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 else {
 
 
-                    Toast.makeText(Home.this, "please select a state", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Home2.this, "please select a state", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -987,7 +927,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
 
 
-            mCurrentPhotoPath = getPath(Home.this , fileUri);
+            mCurrentPhotoPath = getPath(Home2.this , fileUri);
 
 
             image.setImageBitmap(photo);
@@ -1003,31 +943,7 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
 
 
             map.setText(name.toString());
-        }
-        else if (requestCode == 32)
-        {
-
-            if (resultCode == RESULT_OK)
-            {
-
-                Bundle b = data.getExtras();
-
-                state.setText(b.getString("state" , ""));
-                district.setText(b.getString("district" , ""));
-                area.setText(b.getString("area" , ""));
-                bookId = (b.getString("bookingid" , ""));
-                //image.setText(b.getString("image" , ""));
-
-
-                ImageLoader loader = ImageLoader.getInstance();
-                loader.displayImage(b.getString("image" , "") , image);
-
-
-
-            }
-
-        }
-        else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
 
@@ -1255,10 +1171,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
                 @Override
                 public void onClick(View view) {
 
-
-                    adultration = adultration + "," + item.getTitle();
-
-
                     TextView tv = new TextView(context);
 
                     tv.setPadding(20 , 20 , 20 , 20);
@@ -1341,10 +1253,6 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-
-                    pesticides = pesticides + "," + item.getTitle();
-
 
                     TextView tv = new TextView(context);
 
@@ -1561,8 +1469,8 @@ public class Home extends AppCompatActivity implements LocationListener, GoogleA
         if (id == R.id.booking)
         {
 
-            Intent i = new Intent(Home.this , MyBookings.class);
-            startActivityForResult(i , 32);
+            Intent i = new Intent(Home2.this , MyBookings.class);
+            startActivity(i);
 
         }
 
