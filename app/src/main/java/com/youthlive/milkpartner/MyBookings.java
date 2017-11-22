@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.youthlive.milkpartner.Book1POJO.BookBean;
 import com.youthlive.milkpartner.BookingPOJO.BookingBean;
@@ -44,11 +46,15 @@ public class MyBookings extends AppCompatActivity {
 
     List<Datum> list;
 
+    ConnectionDetector cd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_bookings);
+
+        cd = new ConnectionDetector(this);
 
         bar = (ProgressBar)findViewById(R.id.progress);
 
@@ -67,37 +73,102 @@ public class MyBookings extends AppCompatActivity {
         grid.setAdapter(adapter);
 
 
-        bar.setVisibility(View.VISIBLE);
-        app b = (app)getApplicationContext();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://nationproducts.in")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Allapi cr = retrofit.create(Allapi.class);
-
-        Call<BookingBean> call = cr.booking(b.userId);
-
-        call.enqueue(new Callback<BookingBean>() {
+        search.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onResponse(Call<BookingBean> call, Response<BookingBean> response) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                adapter.setgrid(response.body().getData());
-
-                bar.setVisibility(View.GONE);
 
             }
 
             @Override
-            public void onFailure(Call<BookingBean> call, Throwable t) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
-                bar.setVisibility(View.GONE);
+                if (charSequence.length()>0){
+
+
+                   List<Datum> item = new ArrayList<>();
+
+                    for (int j=0 ; j<list.size(); j++){
+
+
+                        String s = list.get(j).getBookingId();
+
+                        if (s.contains(charSequence))
+                        {
+                            item.add(list.get(j));
+                        }
+
+
+                    }
+
+                    adapter.setgrid(item);
+
+                }
+
+                else {
+
+                    adapter.setgrid(list);
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
+
+
+
+        if (cd.isConnectingToInternet()){
+
+            bar.setVisibility(View.VISIBLE);
+            app b = (app)getApplicationContext();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://nationproducts.in")
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            Allapi cr = retrofit.create(Allapi.class);
+
+            Call<BookingBean> call = cr.booking(b.userId);
+
+            call.enqueue(new Callback<BookingBean>() {
+                @Override
+                public void onResponse(Call<BookingBean> call, Response<BookingBean> response) {
+
+
+                    list = response.body().getData();
+
+                    adapter.setgrid(list);
+
+                    bar.setVisibility(View.GONE);
+
+                }
+
+                @Override
+                public void onFailure(Call<BookingBean> call, Throwable t) {
+
+
+                    bar.setVisibility(View.GONE);
+
+                }
+            });
+
+
+
+        }
+
+        else {
+
+            Toast.makeText(MyBookings.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+
 
 
 
@@ -143,6 +214,8 @@ public class MyBookings extends AppCompatActivity {
                     b.putString("bookingid" , item.getBookingId());
                     b.putString("area" , item.getArea());
                     b.putString("image" , item.getImage());
+                    b.putString("sample" , item.getSample());
+                    b.putString("location" , item.getLocation());
 
                     Intent i = new Intent();
 

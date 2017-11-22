@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor edit;
 
+    ConnectionDetector cd;
+
     String[] PERMISSIONS = {android.Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
 
 
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        cd = new ConnectionDetector(this);
 
         pref = getSharedPreferences("pref" , Context.MODE_PRIVATE);
         edit = pref.edit();
@@ -135,57 +139,70 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(final String e , final String p)
     {
-        bar.setVisibility(View.VISIBLE);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://nationproducts.in")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Allapi cr = retrofit.create(Allapi.class);
-
-        Call<loginBean> call = cr.login(e , p);
-
-        call.enqueue(new Callback<loginBean>() {
-            @Override
-            public void onResponse(Call<loginBean> call, Response<loginBean> response) {
 
 
-                if (Objects.equals(response.body().getStatus(), "1"))
-                {
+        if (cd.isConnectingToInternet())
+        {
+            bar.setVisibility(View.VISIBLE);
 
-                    app b = (app)getApplicationContext();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://nationproducts.in")
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
 
-                    b.userId = response.body().getData().getUserId();
-                    b.userName = response.body().getData().getUserName();
-                    b.email = response.body().getData().getEmail();
-                    b.image = response.body().getData().getUserImage();
+            Allapi cr = retrofit.create(Allapi.class);
 
-                    edit.putString("email" , e);
-                    edit.putString("pass" , p);
-                    edit.apply();
+            Call<loginBean> call = cr.login(e , p);
 
-                    Toast.makeText(MainActivity.this , response.body().getMessage() , Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this , Home.class);
-                    startActivity(i);
-                    finish();
+            call.enqueue(new Callback<loginBean>() {
+                @Override
+                public void onResponse(Call<loginBean> call, Response<loginBean> response) {
+
+
+                    if (Objects.equals(response.body().getStatus(), "1"))
+                    {
+
+                        app b = (app)getApplicationContext();
+
+                        b.userId = response.body().getData().getUserId();
+                        b.userName = response.body().getData().getUserName();
+                        b.email = response.body().getData().getEmail();
+                        b.image = response.body().getData().getUserImage();
+
+                        edit.putString("email" , e);
+                        edit.putString("pass" , p);
+                        edit.apply();
+
+                        Toast.makeText(MainActivity.this , response.body().getMessage() , Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MainActivity.this , Home.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this , response.body().getMessage() , Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                    bar.setVisibility(View.GONE);
                 }
-                else
-                {
-                    Toast.makeText(MainActivity.this , response.body().getMessage() , Toast.LENGTH_SHORT).show();
+
+                @Override
+                public void onFailure(Call<loginBean> call, Throwable t) {
+                    bar.setVisibility(View.GONE);
                 }
+            });
+        }
+        else
+        {
+            Toast.makeText(MainActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
 
 
-                bar.setVisibility(View.GONE);
-            }
 
-            @Override
-            public void onFailure(Call<loginBean> call, Throwable t) {
-                bar.setVisibility(View.GONE);
-            }
-        });
     }
 
 

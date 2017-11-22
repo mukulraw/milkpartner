@@ -31,6 +31,9 @@ public class Datum {
     @SerializedName("area")
     @Expose
     private String area;
+    @SerializedName("location")
+    @Expose
+    private String location;
     @SerializedName("image")
     @Expose
     private String image;
@@ -104,6 +107,14 @@ public class Datum {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getImage() {

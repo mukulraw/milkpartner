@@ -90,6 +90,7 @@ public class Home2 extends AppCompatActivity implements LocationListener, Google
     Dialog dialog , dialog1 , dialog2 , dialog3;
     Location mLastLocation;
 
+    ConnectionDetector cd;
 
     EditText area;
 
@@ -184,6 +185,8 @@ public class Home2 extends AppCompatActivity implements LocationListener, Google
 
         submit = (TextView) findViewById(R.id.sub);
 
+        cd = new ConnectionDetector(this);
+
         su = (TextView) findViewById(R.id.sub);
 
         start = (TextView) findViewById(R.id.start);
@@ -221,59 +224,74 @@ public class Home2 extends AppCompatActivity implements LocationListener, Google
             public void onClick(View view) {
 
 
-                dialog2 = new Dialog(Home2.this);
-                dialog2.setContentView(R.layout.dialog);
-                dialog2.setCancelable(true);
-                dialog2.show();
+                if (cd.isConnectingToInternet()){
 
 
-                Button ok = (Button) dialog2.findViewById(R.id.ok);
-
-                ok.setVisibility(View.GONE);
-
-                final RecyclerView grid = (RecyclerView) dialog2.findViewById(R.id.grid);
-                final GridLayoutManager manager = new GridLayoutManager(context, 1);
-
-                bar.setVisibility(View.VISIBLE);
-                Log.d("hfghfd", "response");
-
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://nationproducts.in")
-                        .addConverterFactory(ScalarsConverterFactory.create())
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                Allapi cr = retrofit.create(Allapi.class);
-
-                Call<StateBean> call = cr.s();
-
-                call.enqueue(new Callback<StateBean>() {
-                    @Override
-                    public void onResponse(Call<StateBean> call, Response<StateBean> response) {
+                    dialog2 = new Dialog(Home2.this);
+                    dialog2.setContentView(R.layout.dialog);
+                    dialog2.setCancelable(true);
+                    dialog2.show();
 
 
-                        statelist.clear();
+                    Button ok = (Button) dialog2.findViewById(R.id.ok);
+
+                    ok.setVisibility(View.GONE);
+
+                    final RecyclerView grid = (RecyclerView) dialog2.findViewById(R.id.grid);
+                    final GridLayoutManager manager = new GridLayoutManager(context, 1);
+
+                    bar.setVisibility(View.VISIBLE);
+                    Log.d("hfghfd", "response");
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://nationproducts.in")
+                            .addConverterFactory(ScalarsConverterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+                    Allapi cr = retrofit.create(Allapi.class);
+
+                    Call<StateBean> call = cr.s();
+
+                    call.enqueue(new Callback<StateBean>() {
+                        @Override
+                        public void onResponse(Call<StateBean> call, Response<StateBean> response) {
 
 
-                        StateAdapter adapter = new StateAdapter(Home2.this , response.body().getStateList());
-                        grid.setAdapter(adapter);
-                        grid.setLayoutManager(manager);
+                            statelist.clear();
+
+
+                            StateAdapter adapter = new StateAdapter(Home2.this , response.body().getStateList());
+                            grid.setAdapter(adapter);
+                            grid.setLayoutManager(manager);
 
 
 
-                        bar.setVisibility(View.GONE);
+                            bar.setVisibility(View.GONE);
 
-                    }
+                        }
 
-                    @Override
-                    public void onFailure(Call<StateBean> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<StateBean> call, Throwable t) {
 
 
-                        Log.d("sdfhsg", t.toString());
+                            Log.d("sdfhsg", t.toString());
 
-                        bar.setVisibility(View.GONE);
-                    }
-                });
+                            bar.setVisibility(View.GONE);
+                        }
+                    });
+
+
+
+
+                }
+
+                else {
+
+
+                    Toast.makeText(Home2.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
 
 
             }
@@ -608,57 +626,71 @@ public class Home2 extends AppCompatActivity implements LocationListener, Google
             @Override
             public void onClick(View view) {
 
-
-
-                dialog3 = new Dialog(Home2.this);
-                dialog3.setContentView(R.layout.dialog);
-                dialog3.setCancelable(true);
-                dialog3.show();
-
-
-                Button ok = (Button) dialog3.findViewById(R.id.ok);
-
-                ok.setVisibility(View.GONE);
-
-                final RecyclerView grid = (RecyclerView) dialog3.findViewById(R.id.grid);
-                final GridLayoutManager manager = new GridLayoutManager(context, 1);
+                if (cd.isConnectingToInternet()){
 
 
 
+                    dialog3 = new Dialog(Home2.this);
+                    dialog3.setContentView(R.layout.dialog);
+                    dialog3.setCancelable(true);
+                    dialog3.show();
 
-                bar.setVisibility(View.VISIBLE);
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://nationproducts.in")
-                        .addConverterFactory(ScalarsConverterFactory.create())
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
 
-                Allapi cr = retrofit.create(Allapi.class);
+                    Button ok = (Button) dialog3.findViewById(R.id.ok);
 
-                Call<CityBean> call = cr.city(stateId);
+                    ok.setVisibility(View.GONE);
 
-                call.enqueue(new Callback<CityBean>() {
-                    @Override
-                    public void onResponse(Call<CityBean> call, Response<CityBean> response) {
+                    final RecyclerView grid = (RecyclerView) dialog3.findViewById(R.id.grid);
+                    final GridLayoutManager manager = new GridLayoutManager(context, 1);
 
-                        DistrictAdapter adapter = new DistrictAdapter(Home2.this , response.body().getCityList());
 
-                        grid.setLayoutManager(manager);
-                        grid.setAdapter(adapter);
 
-                        bar.setVisibility(View.GONE);
 
-                    }
+                    bar.setVisibility(View.VISIBLE);
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://nationproducts.in")
+                            .addConverterFactory(ScalarsConverterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
 
-                    @Override
-                    public void onFailure(Call<CityBean> call, Throwable t) {
+                    Allapi cr = retrofit.create(Allapi.class);
 
-                        Log.d("fjldfk", t.toString());
+                    Call<CityBean> call = cr.city(stateId);
 
-                        bar.setVisibility(View.GONE);
+                    call.enqueue(new Callback<CityBean>() {
+                        @Override
+                        public void onResponse(Call<CityBean> call, Response<CityBean> response) {
 
-                    }
-                });
+                            DistrictAdapter adapter = new DistrictAdapter(Home2.this , response.body().getCityList());
+
+                            grid.setLayoutManager(manager);
+                            grid.setAdapter(adapter);
+
+                            bar.setVisibility(View.GONE);
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<CityBean> call, Throwable t) {
+
+                            Log.d("fjldfk", t.toString());
+
+                            bar.setVisibility(View.GONE);
+
+                        }
+                    });
+
+
+                }
+
+                else {
+
+                    Toast.makeText(Home2.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
             }
         });
 
@@ -666,6 +698,7 @@ public class Home2 extends AppCompatActivity implements LocationListener, Google
 
 
         start.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
@@ -751,51 +784,55 @@ public class Home2 extends AppCompatActivity implements LocationListener, Google
             public void onClick(View view) {
 
 
-                String s = state.getText().toString();
-                String d = district.getText().toString();
-                String a = area.getText().toString();
+
+                if (cd.isConnectingToInternet()){
+
+
+                    String s = state.getText().toString();
+                    String d = district.getText().toString();
+                    String a = area.getText().toString();
 
 
 
-                if (s.length()>0){
+                    if (s.length()>0){
 
 
-                    if (d.length()>0){
+                        if (d.length()>0){
 
 
-                        if (a.length()>0){
+                            if (a.length()>0){
 
 
-                            if (latitude.length()>0){
+                                if (latitude.length()>0){
 
 
-                                if (mCurrentPhotoPath.length()>0)
+                                    if (mCurrentPhotoPath.length()>0)
 
-                                {
-
-
-                                    MultipartBody.Part body = null;
+                                    {
 
 
-                                    File file = new File(mCurrentPhotoPath);
+                                        MultipartBody.Part body = null;
 
 
-                                    final RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                                        File file = new File(mCurrentPhotoPath);
 
-                                    body = MultipartBody.Part.createFormData("image", file.getName(), reqFile);
 
-                                    bar.setVisibility(View.VISIBLE);
-                                    app b = (app)getApplicationContext();
+                                        final RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
-                                    Retrofit retrofit = new Retrofit.Builder()
-                                            .baseUrl("http://nationproducts.in")
-                                            .addConverterFactory(ScalarsConverterFactory.create())
-                                            .addConverterFactory(GsonConverterFactory.create())
-                                            .build();
+                                        body = MultipartBody.Part.createFormData("image", file.getName(), reqFile);
 
-                                    Allapi cr = retrofit.create(Allapi.class);
+                                        bar.setVisibility(View.VISIBLE);
+                                        app b = (app)getApplicationContext();
 
-                                    Call<BookBean> call = cr.book(b.userId ,state.getText().toString() , district.getText().toString() , latitude , longitude , area.getText().toString() , body , samp);
+                                        Retrofit retrofit = new Retrofit.Builder()
+                                                .baseUrl("http://nationproducts.in")
+                                                .addConverterFactory(ScalarsConverterFactory.create())
+                                                .addConverterFactory(GsonConverterFactory.create())
+                                                .build();
+
+                                        Allapi cr = retrofit.create(Allapi.class);
+
+                                    /*Call<BookBean> call = cr.book(b.userId ,state.getText().toString() , district.getText().toString() , latitude , longitude , area.getText().toString() , body , samp);
 
                                     call.enqueue(new Callback<BookBean>() {
                                         @Override
@@ -823,33 +860,41 @@ public class Home2 extends AppCompatActivity implements LocationListener, Google
 
                                         }
                                     });
+*/
 
 
 
 
+                                    }
+                                    else {
+
+
+                                        Toast.makeText(Home2.this, "please Select an image", Toast.LENGTH_SHORT).show();
+                                    }
 
                                 }
                                 else {
 
-
-                                    Toast.makeText(Home2.this, "please Select an image", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Home2.this, "please Select a Location", Toast.LENGTH_SHORT).show();
                                 }
 
+
+
+
+
+
                             }
+
                             else {
+                                Toast.makeText(Home2.this, "please Select a Sample", Toast.LENGTH_SHORT).show();
 
-                                Toast.makeText(Home2.this, "please Select a Location", Toast.LENGTH_SHORT).show();
                             }
-
-
-
-
 
 
                         }
-
                         else {
-                            Toast.makeText(Home2.this, "please Select a Sample", Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(Home2.this, "please select a district", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -857,16 +902,20 @@ public class Home2 extends AppCompatActivity implements LocationListener, Google
                     }
                     else {
 
-                        Toast.makeText(Home2.this, "please select a district", Toast.LENGTH_SHORT).show();
 
+                        Toast.makeText(Home2.this, "please select a state", Toast.LENGTH_SHORT).show();
                     }
+
+
+
+
+
 
 
                 }
                 else {
 
-
-                    Toast.makeText(Home2.this, "please select a state", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Home2.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 
 

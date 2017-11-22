@@ -49,6 +49,7 @@ public interface Allapi {
             @Part("latitude") String lati,
             @Part("longitude") String longi,
             @Part("area") String area,
+            @Part("location") String location,
             @Part MultipartBody.Part file,
             @Part("sample") String sam
     );
